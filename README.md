@@ -1,103 +1,106 @@
-Data Engineering Basics with Docker, Python & uv
+Data Engineering Basics with Docker, Python and uv
 
-This project demonstrates basic data engineering concepts using Docker, Python, command-line arguments, Parquet files, and uv for virtual environments.
+This project explains basic data engineering concepts using Docker, Python, command-line arguments, Parquet files and uv virtual environments.
 
-1. What is Docker?
+What is Docker?
 
-Docker is a tool used to run applications in isolated containers.
+Docker is a tool used to run applications inside isolated containers.
+It helps us run the same code with the same environment everywhere.
 
-Why Docker in Data Engineering?
+Why Docker is used in Data Engineering:
 
-Same environment everywhere
+Same environment on laptop, server and cloud
 
-Easy setup of tools (Python, Spark, DBs)
+Easy setup of tools like Python, Spark, Databases
 
 No dependency conflicts
 
-Used for ETL pipelines and deployment
+Reliable data pipelines
 
-2. Basic Docker Commands Used
-# Check docker version
+Basic Docker Commands Used
+
 docker --version
+Checks Docker version
 
-# Check docker is running
 docker ps
+Checks whether Docker is running
 
-# Run Ubuntu container with bash
 docker run -it ubuntu bash
+Runs an Ubuntu container and opens bash shell
 
-# Update packages inside ubuntu
 apt update
+Updates package list inside the container
 
-# Exit container
 exit
+Exits the container
 
-3. Running Python using Docker
-# Run Python image
+Running Python using Docker
+
 docker run -it python:3.13.1-slim
 
+This opens the Python shell directly.
 
-This opens the Python shell:
-
->>>
-
-
-Exit Python:
-
+To exit Python shell:
 exit()
 
-4. Running Bash inside Python Docker Image
+Running bash inside Python Docker image
+
 docker run -it python:3.13.1-slim bash
 
+This opens Linux bash inside the Python container.
 
-This opens a Linux bash shell inside the container.
+Docker Images and Containers
 
-5. Docker Images and Containers
-# List all images
 docker images
+Lists all Docker images
 
-# List all containers (running + stopped)
 docker ps -a
+Lists all containers (running and stopped)
 
-Delete all containers and images
+Delete all containers and images:
+
 docker stop $(docker ps -aq)
 docker rm $(docker ps -aq)
 docker rmi -f $(docker images -q)
 
-6. Linux Basic Commands
-pwd        # shows current directory
-ls         # list files and folders
-cd test    # move into test folder
-cd ..      # go back
+Basic Linux Commands
 
-7. Volume Mounting in Docker
+pwd
+Shows current directory
+
+ls
+Lists files and folders
+
+cd test
+Moves into test folder
+
+cd ..
+Moves back to parent folder
+
+Docker Volume Mounting
+
 docker run -it -v $(pwd)/test:/app/test python:3.13.1-slim bash
 
-Meaning:
+This connects local folder "test" to "/app/test" inside the container.
+Any file change in local folder is reflected inside container and vice versa.
 
-$(pwd)/test → local folder
+Data Pipeline using Python
 
-/app/test → folder inside container
+pipeline.py file:
 
-Both folders are linked
-
-Changes reflect on both sides.
-
-8. Data Pipeline Using Python
-pipeline.py
 import sys
 import pandas as pd
 
 if len(sys.argv) < 2:
-    print("Usage: python pipeline.py <day>")
-    sys.exit(1)
+print("Usage: python pipeline.py <day>")
+sys.exit(1)
 
 day = int(sys.argv[1])
 print(f"Running pipeline for day {day}")
 
 df = pd.DataFrame({
-    "A": [1, 2],
-    "B": [3, 4]
+"A": [1, 2],
+"B": [3, 4]
 })
 
 print(df)
@@ -107,66 +110,62 @@ df.to_parquet(output_file)
 
 print(f"Pipeline completed. File saved as {output_file}")
 
-9. Running the Pipeline
+Running the Pipeline
+
 python pipeline.py 5
 
-Explanation:
+Here:
 
-5 is the input (day)
+5 is the input value (day)
 
 sys.argv[1] reads this value
 
-Output file:
+Output file created: output_day_5.parquet
 
-output_day_5.parquet
+Parquet Error and Fix
 
-10. Parquet Error & Fix
-Error:
-Missing optional dependency 'pyarrow'
+Error occurs because pandas alone cannot write parquet files.
 
 Fix:
 pip install pyarrow
 
+pyarrow is required to read/write parquet files.
 
-Parquet format needs pyarrow or fastparquet.
-
-11. What is uv?
+What is uv?
 
 uv is a fast Python package manager and virtual environment tool.
+It is a modern replacement for pip and venv.
 
-Why uv?
+Why uv is used:
 
-Faster than pip
+Very fast package installation
 
-Cleaner dependency management
+Clean dependency management
 
-Modern tool used in industry
+Separate environment per project
 
-12. uv Commands Used
-# Install uv
+Used in industry
+
+uv Commands Used
+
 pip install uv
+Installs uv tool
 
-# Create virtual environment with Python 3.13
 uv init --python=3.13
+Creates a virtual environment using Python 3.13
 
-What this does:
+This creates:
 
-Creates .venv/
+.venv folder
 
-Uses Python 3.13
+pyproject.toml file
 
-Generates pyproject.toml
+Python is installed only inside the project, not globally.
 
-❌ Does NOT install Python globally
-✅ Python is only inside the project environment
+Installing packages using uv
 
-13. Installing Packages Using uv
 uv pip install pandas pyarrow
 
-14. pip vs uv
-pip	uv
-Slower	Faster
-Old tool	Modern tool
-Manual venv	Auto venv
-Basic	Industry-ready
+This is faster than pip install.
 
+Final Summary
