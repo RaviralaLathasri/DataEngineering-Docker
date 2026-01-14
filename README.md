@@ -22,6 +22,9 @@ exit()
 # Run python image with bash
 docker run -it python:3.13.1-slim bash
 
+#check python version in docker
+python3 --version
+
 # List all containers
 docker ps -a
 
@@ -71,33 +74,22 @@ Ctrl + D
 Ctrl + P + Q
 
 
-# Use: Check current status of working directory
-# Meaning: Shows files that are modified, staged, or untracked
+# Check current status of working directory(Shows files that are modified, staged, or untracked)
 git status
 
-
-# Use: Add all files in 'pipeline' folder to staging area
-# Meaning: Prepares files for commit
+Add all files in 'pipeline' folder to staging area(Prepares files for commit)
 git add pipeline/
 
-
-# Use: Commit staged changes to local repository
-# Meaning: Saves changes in history with a message
+Commit staged changes to local repository(Saves changes in history with a message)
 git commit -m "Added data pipeline script"
 
-
-# Use: Fetch and merge remote changes from GitHub main branch
-# Meaning: Sync local repository with remote to avoid conflicts
+# Fetch and merge remote changes from GitHub main branch(Sync local repository with remote to avoid conflicts)
 git pull --no-rebase origin main
 
-
-# Use: Push local commits to GitHub
-# Meaning: Updates remote main branch with your changes
+#Push local commits to GitHub(Updates remote main branch with your changes)
 git push origin main
 
-
-# Use: View short commit history
-# Meaning: Shows recent commits, merge commits, and messages
+#  View short commit history(Shows recent commits, merge commits, and messages)
 git log --oneline
 
 
