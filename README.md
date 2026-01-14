@@ -86,8 +86,10 @@ git commit -m "Added data pipeline script"
 # Fetch and merge remote changes from GitHub main branch(Sync local repository with remote to avoid conflicts)
 git pull --no-rebase origin main
 
+
 #Push local commits to GitHub(Updates remote main branch with your changes)
 git push origin main
+
 
 #  View short commit history(Shows recent commits, merge commits, and messages)
 git log --oneline
