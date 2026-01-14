@@ -57,3 +57,16 @@ pip install uv
 
 # Create virtual environment with Python 3.13 using uv
 uv init --python=3.13
+
+# TO start the same container
+docker start <container_name>
+
+#Entering to container if container alredy runs in background
+docker attach <container_name>
+
+#Container exit + stop
+Ctrl + D
+
+#Exit only, container run avuthundi
+Ctrl + P + Q
+
