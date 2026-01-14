@@ -93,4 +93,20 @@ git push origin main
 #  View short commit history(Shows recent commits, merge commits, and messages)
 git log --oneline
 
+# Build custom Docker image for pipeline
+docker build -t test:pandas 
+
+# Run the created Docker image in interactive mode
+docker run -it test:pandas bash
+
+# Run the file inside the docker 
+python pipeline.py 5
+
+# creating Docker using uv insted of pip
+docker build -t test:pandas-uv .
+
+# Run docker image uv
+docker run -it test:pandas-uv 5
+
+
 
