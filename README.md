@@ -1,112 +1,269 @@
-# Check docker version
+# Docker & Python Pipeline – README
+
+This README provides a quick, step‑by‑step reference for working with **Docker**, **Python containers**, **volume mounting**, **Git**, and building custom Docker images (with `pip` and `uv`).
+
+---
+
+## 1. Verify Docker Installation
+
+Check Docker version:
+
+```bash
 docker --version
+```
 
-# Check docker is running
+Check if Docker is running:
+
+```bash
 docker ps
+```
 
-# Run ubuntu container with bash
+---
+
+## 2. Working with Ubuntu Container
+
+Run an Ubuntu container with bash:
+
+```bash
 docker run -it ubuntu bash
+```
 
-# Update packages inside ubuntu
+Update packages inside Ubuntu:
+
+```bash
 apt update
+```
 
-# Exit container
+Exit the container:
+
+```bash
 exit
+```
 
-# Run python docker image
+---
+
+## 3. Working with Python Docker Image
+
+Run Python container (interactive shell):
+
+```bash
 docker run -it python:3.13.1-slim
+```
 
-# Exit python shell
+Exit Python shell:
+
+```python
 exit()
+```
 
-# Run python image with bash
+Run Python container with bash:
+
+```bash
 docker run -it python:3.13.1-slim bash
+```
 
-#check python version in docker
+Check Python version inside container:
+
+```bash
 python3 --version
+```
 
-# List all containers
+---
+
+## 4. Docker Containers & Images Management
+
+List all containers:
+
+```bash
 docker ps -a
+```
 
-# List docker images
+List Docker images:
+
+```bash
 docker images
+```
 
-# Stop all containers
+Stop all running containers:
+
+```bash
 docker stop $(docker ps -aq)
+```
 
-# Remove all containers
+Remove all containers:
+
+```bash
 docker rm $(docker ps -aq)
+```
 
-# Remove all docker images
+Remove all Docker images:
+
+```bash
 docker rmi -f $(docker images -q)
+```
 
-# Check current directory
+---
+
+## 5. Directory Navigation
+
+Check current directory:
+
+```bash
 pwd
+```
 
-# Go to test folder
+Go to `test` folder:
+
+```bash
 cd test
+```
 
-# Run python container with volume mounting
+---
+
+## 6. Volume Mounting with Docker
+
+Run Python container with volume mounting:
+
+```bash
 docker run -it -v $(pwd)/test:/app/test python:3.13.1-slim bash
+```
 
-# Run python pipeline with argument
+Run Python pipeline with argument:
+
+```bash
 python pipeline.py 5
+```
 
-# Install pyarrow (for parquet support)
+---
+
+## 7. Python Dependencies
+
+Install `pyarrow` (for Parquet support):
+
+```bash
 pip install pyarrow
+```
 
-# Install uv
+Install `uv`:
+
+```bash
 pip install uv
+```
 
-# Create virtual environment with Python 3.13 using uv
+Create virtual environment with Python 3.13 using `uv`:
+
+```bash
 uv init --python=3.13
+```
 
-# TO start the same container
+---
+
+## 8. Restarting & Attaching Containers
+
+Start an existing container:
+
+```bash
 docker start <container_name>
+```
 
-#Entering to container if container alredy runs in background
+Attach to a running container:
+
+```bash
 docker attach <container_name>
+```
 
-#Container exit + stop
+Exit and stop container:
+
+```text
 Ctrl + D
+```
 
-#Exit only, container run avuthundi
+Exit container without stopping it:
+
+```text
 Ctrl + P + Q
+```
 
+---
 
-# Check current status of working directory(Shows files that are modified, staged, or untracked)
+## 9. Git Commands Workflow
+
+Check status of working directory:
+
+```bash
 git status
+```
 
-Add all files in 'pipeline' folder to staging area(Prepares files for commit)
+Add all files in `pipeline` folder to staging:
+
+```bash
 git add pipeline/
+```
 
-Commit staged changes to local repository(Saves changes in history with a message)
+Commit changes:
+
+```bash
 git commit -m "Added data pipeline script"
+```
 
-# Fetch and merge remote changes from GitHub main branch(Sync local repository with remote to avoid conflicts)
+Pull latest changes from GitHub (main branch):
+
+```bash
 git pull --no-rebase origin main
+```
 
-# Push local commits to GitHub(Updates remote main branch with your changes)
+Push local commits to GitHub:
+
+```bash
 git push origin main
+```
 
+View commit history:
 
-#  View short commit history(Shows recent commits, merge commits, and messages)
+```bash
 git log --oneline
+```
 
-# Build custom Docker image for pipeline
-docker build -t test:pandas 
+---
 
-# Run the created Docker image in interactive mode
+## 10. Building & Running Custom Docker Images
+
+### Using pip
+
+Build Docker image:
+
+```bash
+docker build -t test:pandas .
+```
+
+Run the Docker image:
+
+```bash
 docker run -it test:pandas bash
+```
 
-# Run the file inside the docker 
+Run pipeline inside container:
+
+```bash
 python pipeline.py 5
+```
 
-# creating Docker using uv insted of pip
+---
+
+### Using uv instead of pip
+
+Build Docker image with `uv`:
+
+```bash
 docker build -t test:pandas-uv .
+```
 
-# Run docker image uv
+Run Docker image with argument:
+
+```bash
 docker run -it test:pandas-uv 5
+```
 
+---
 
-
+✅ This README serves as a **complete reference** for Docker + Python pipeline setup and workflow.
