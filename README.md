@@ -1,4 +1,4 @@
-# Docker & Python Pipeline – README
+# Docker Commands
 
 This README provides a quick, step‑by‑step reference for working with **Docker**, **Python containers**, **volume mounting**, **Git**, and building custom Docker images (with `pip` and `uv`).
 
@@ -266,4 +266,4 @@ docker run -it test:pandas-uv 5
 
 ---
 
-✅ This README serves as a **complete reference** for Docker + Python pipeline setup and workflow.
+✅ This README serves as a **complete reference** for Docker 
